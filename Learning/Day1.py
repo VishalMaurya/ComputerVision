@@ -31,6 +31,7 @@ def read_cam(camId):
         cv2.imshow('Output', img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+    cap.release()
 
 #read_cam(0)
 
