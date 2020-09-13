@@ -53,9 +53,11 @@ def VirtualPaint():
 
     myPoints =  []  ## [x , y , colorId ]
 
-
+    cap = cv2.VideoCapture(0)
+    cap.set(3, 640) # setting width 
+    cap.set(4, 480) # setting height
+    cap.set(10, 150) # set brightness
     while True:
-        cap = getCamera(0)
         success, img = cap.read()
         if img is None:
             continue
