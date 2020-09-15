@@ -1,5 +1,6 @@
 from cv2 import cv2
 import numpy as np
+from helper import stackImages
 
 
 def preProcessing(img):
@@ -27,8 +28,9 @@ def getContours(img, imgContour):
                 if area >maxArea and len(approx) == 4:
                     biggest = approx
                     maxArea = area
-        cv2.drawContours(imgContour, biggest, -1, (255, 0, 0), 20)
-    return biggest
+        if contours is not None:
+            cv2.drawContours(imgContour, biggest, -1, (255, 0, 0), 20)
+        return biggest
 
 def reorder (myPoints):
     myPoints = myPoints.reshape((4,2))
@@ -73,10 +75,19 @@ def DocScanner():
         imgThres = preProcessing(img)
         biggest = getContours(imgThres, imgContour)
 
-        # imgWarped = getWarp(img,biggest)
+        if biggest.size !=0:
+            imgWarped=getWarp(img,biggest)
+            # imageArray = ([img,imgThres],
+            #           [imgContour,imgWarped])
+            imageArray = ([imgContour, imgWarped])
+            cv2.imshow("ImageWarped", imgWarped)
+        else:
+            # imageArray = ([img, imgThres],
+            #               [img, img])
+            imageArray = ([imgContour, img])
 
-
-        cv2.imshow('Output', biggest)
+        stackedImages = stackImages(0.6,imageArray)
+        cv2.imshow("WorkFlow", stackedImages)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
