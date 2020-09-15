@@ -15,22 +15,19 @@ def preProcessing(img):
 def getContours(img, imgContour):
     biggest = np.array([])
     maxArea = 0
-    while True:
-        if img.shape[1] == 0:
-            continue
-        contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-        for cnt in contours:
-            area = cv2.contourArea(cnt)
-            if area>5000:
-                #cv2.drawContours(imgContour, cnt, -1, (255, 0, 0), 3)
-                peri = cv2.arcLength(cnt,True)
-                approx = cv2.approxPolyDP(cnt,0.02*peri,True)
-                if area >maxArea and len(approx) == 4:
-                    biggest = approx
-                    maxArea = area
-        if contours is not None:
-            cv2.drawContours(imgContour, biggest, -1, (255, 0, 0), 20)
-        return biggest
+    contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area>5000:
+            #cv2.drawContours(imgContour, cnt, -1, (255, 0, 0), 3)
+            peri = cv2.arcLength(cnt,True)
+            approx = cv2.approxPolyDP(cnt,0.02*peri,True)
+            if area >maxArea and len(approx) == 4:
+                biggest = approx
+                maxArea = area
+    cv2.drawContours(imgContour, biggest, -1, (255, 0, 0), 20)
+    return biggest
+
 
 def reorder (myPoints):
     myPoints = myPoints.reshape((4,2))
@@ -74,7 +71,6 @@ def DocScanner():
         imgContour = img.copy()
         imgThres = preProcessing(img)
         biggest = getContours(imgThres, imgContour)
-
         if biggest.size !=0:
             imgWarped=getWarp(img,biggest)
             # imageArray = ([img,imgThres],
@@ -88,6 +84,7 @@ def DocScanner():
 
         stackedImages = stackImages(0.6,imageArray)
         cv2.imshow("WorkFlow", stackedImages)
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
