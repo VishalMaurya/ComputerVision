@@ -9,6 +9,10 @@ def getCamera(camId):
     return cap
 
 def findColor(img,myColors,myColorValues, imgFinal):
+    """
+    find color of object and create a cricle and return it's point.
+
+    """
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     count = 0
     pinPoints=[]
@@ -21,10 +25,13 @@ def findColor(img,myColors,myColorValues, imgFinal):
         if x!=0 and y!=0:
             pinPoints.append([x,y,count])
         count +=1
-        #cv2.imshow(str(color[0]),mask)
+        # cv2.imshow(str(color[0]),mask)
     return pinPoints
 
 def getContours(img):
+    """
+    get the bound box and return it's top middle point.
+    """
     contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     x,y,w,h = 0,0,0,0
     for cnt in contours:
@@ -58,7 +65,7 @@ def VirtualPaint():
     cap.set(4, 480) # setting height
     cap.set(10, 150) # set brightness
     while True:
-        success, img = cap.read()
+        _ , img = cap.read()
         if img is None:
             continue
         imgFinal = img.copy()
