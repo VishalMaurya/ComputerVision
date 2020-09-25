@@ -42,6 +42,7 @@ def reorder (myPoints):
     myPointsNew[2] = myPoints[np.argmax(diff)]
     return myPointsNew
 
+
 def getWarp(img,biggest):
     biggest = reorder(biggest)
     pts1 = np.float32(biggest)
