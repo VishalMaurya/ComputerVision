@@ -27,9 +27,9 @@ def numberPlateDetection():
         # if img is None:
         #     continue
         imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        numberPlates = nPlateCascade.detectMultiScale(img, 1.1, 10)
+        numberPlates = nPlateCascade.detectMultiScale(imgGray, 1.1, 10)
         for (x, y, w, h) in numberPlates:
-            area = w*h
+            area = w*h 
             if area >minArea:
                 cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 255), 2)
                 cv2.putText(img,"Number Plate",(x,y-5),
