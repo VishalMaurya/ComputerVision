@@ -2,10 +2,6 @@ from cv2 import cv2
 # import numpy as np
 
 
-
-  
-    
-
 def numberPlateDetection():
     #############################################
     path = 'Projects/resources/haarcascade_russian_plate_number.xml'
@@ -23,7 +19,7 @@ def numberPlateDetection():
     cap.set(10,150)
 
     while True:
-        success, img = cap.read()
+        _ , img = cap.read()
         # if img is None:
         #     continue
         imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -37,8 +33,7 @@ def numberPlateDetection():
                 imgRoI = img[y:y+h,x:x+w]
                 cv2.imshow("ROI", imgRoI)
             cv2.imshow("Result", img)
-        
-        
+               
 
         if cv2.waitKey(1) & 0xFF == ord('s'):
             cv2.imwrite("Projects/resources/scanned/NoPlate_"+str(count)+".jpg",imgRoI)

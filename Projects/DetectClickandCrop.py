@@ -57,17 +57,17 @@ def DetectClickandCrop(path):
             counter = 0
             img = cv2.imread(path)
 
-
         for x in range (0,4):
-            cv2.circle(img,(edges[x][0],edges[x][1]),3,(0,255,0),cv2.FILLED)
-
-        
+            cv2.circle(img,(edges[x][0],edges[x][1]),3,(0,255,0),cv2.FILLED)     
 
         cv2.imshow("Original Image ", img)
         cv2.setMouseCallback("Original Image ", mousePoints)
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+
+
 
 path = './resources/cards.jpg'
 
