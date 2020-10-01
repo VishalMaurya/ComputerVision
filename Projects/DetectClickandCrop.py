@@ -4,6 +4,7 @@ import random
 
 
 def wrap_perspective(img,edges):
+    global imgOutput
     width, height = 250,350
     pts1 = np.float32([edges[0],edges[1],edges[2],edges[3]])
     pts2 = np.float32([[0,0],[width,0],[0,height],[width,height]])
@@ -13,12 +14,12 @@ def wrap_perspective(img,edges):
 
     # if cv2.waitKey(1) & 0xFF == ord('s'):
     #     cv2.imwrite("Projects/resources/scanned/Cropped_"+str(random.randint(1, 99))+".jpg",imgOutput)
-    #     cv2.rectangle(imgOutput,(0,200),(640,300),(0,255,0),cv2.FILLED)
+    #     # cv2.rectangle(imgOutput,(0,200),(640,300),(0,255,0),cv2.FILLED)
 
     #     cv2.putText(imgOutput,"Scan Saved",(150,265),cv2.FONT_HERSHEY_DUPLEX,
     #                     2,(0,0,255),2)
     #     cv2.imshow("Result",imgOutput)
-    #     cv2.waitKey(50)
+        # cv2.waitKey(50)
 
 
 
@@ -62,6 +63,7 @@ def DetectClickandCrop(path):
 
         cv2.imshow("Original Image ", img)
         cv2.setMouseCallback("Original Image ", mousePoints)
+
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
