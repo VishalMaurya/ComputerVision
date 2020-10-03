@@ -12,7 +12,7 @@ args = vars(ap.parse_args())
 
 # initialize rectangle and square kernel
 rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (13, 5))
-squrKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (21, 21))
+squrKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (27, 27))
 
 
 # loop over the image directory
