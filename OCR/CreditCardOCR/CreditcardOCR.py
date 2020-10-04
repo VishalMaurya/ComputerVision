@@ -1,5 +1,5 @@
 # USAGE
-# python CreditcardOCR.py --image images/credit_card_01.png --reference ocr_a_reference.png
+# python CreditcardOCR.py --image ./cc_1.png --reference ./ocr_a_reference.png
 
 # import the necessary packages
 from imutils import contours
