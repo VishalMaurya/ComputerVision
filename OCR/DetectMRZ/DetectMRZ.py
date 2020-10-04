@@ -70,7 +70,7 @@ for imagePath in paths.list_images(args["image"]):
             pY = int((y + h) * 0.03)
             (x, y) = (x -pX, y-pY)
             (w, h) = (w + (pX * 2), h + (pY * 2))
-            print(aspratio)
+            # print(aspratio)
             # get the ROI and draw bounding box
             ROI = image[y:y+h, x:x+w].copy()
             cv2.rectangle(image, (x,y), (x+w,y+h), (0, 255, 255), 2)
